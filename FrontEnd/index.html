@@ -59,8 +59,8 @@
                         <label for="categories">Catégorie</label>
                         <select class="myCategories" name="category" id="categories">
                         </select>
-
-                    <input type="submit" onclick="submitForm(event);" value="valider">
+                    <hr>
+                    <input type="submit" onclick="submitForm();" value="valider">
                 </form>
             </div>
         </div>
@@ -179,10 +179,22 @@
             })
             .then(data => {
                 console.log('Succès:', data);
+                addImageToGallery(data.imageUrl);
             })
             .catch(error => {
                 console.log('Erreurs:', error);
             });
+        function addImageToGallery(imageUrl) {
+            const gallery = document.querySelector(".gallery");
+
+            // Crée un nouvel élément d'image
+            const img = document.createElement("img");
+            img.src = imageUrl; // Assignez l'URL de l'image reçue
+            img.alt = "Nouvelle photo"; // Texte alternatif, peut être personnalisé
+
+            // Ajoute l'image à la galerie
+            gallery.appendChild(img);
+        }
     }
 </script>
 </html>
