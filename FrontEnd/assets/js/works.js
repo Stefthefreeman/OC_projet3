@@ -113,13 +113,7 @@ window.onclick = function (event) {
         modal.style.display = "none";
     }
 }
-function showLink(){
-    const link = document.getElementById("dismiss");
-   // localStorage.removeItem("authToken");
-    if(localStorage.getItem("authToken") !=="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTczMTQwNzIxNSwiZXhwIjoxNzMxNDkzNjE1fQ.F9LVOfnL75DrrM9xDm04PtP0TZOtz21QJqwn2Tjnuiw" ){}
-    link.style.display = "none";
-}
-//showLink();
+
 function selectInModal(categories) {
     for (let i = 0; i < categories.length; i++) {
         const category = categories[i];
