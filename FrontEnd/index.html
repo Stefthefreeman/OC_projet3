@@ -52,15 +52,13 @@
                         <span class="file-info">jpg, png ; 4mo max</span>
                     </div>
                     <br>
-
                         <label for="nameImg">Titre</label>
                         <input type="text" name="title" id="nameImg">
-
                         <label for="categories">Catégorie</label>
                         <select class="myCategories" name="category" id="categories">
                         </select>
                     <hr>
-                    <input type="submit" onclick="submitForm();" value="valider">
+                    <input type="submit" onclick="submitFormAddWork();" value="valider">
                 </form>
             </div>
         </div>
@@ -148,21 +146,19 @@
     }
 
     // Ouvrir le sélecteur de fichier lorsque l'utilisateur clique sur l'aperçu
-    document.getElementById("imagePreview").addEventListener("click", function () {
+        document.getElementById("imagePreview").addEventListener("click", function () {
         document.getElementById("fileInput").click();
     });
-    function submitForm(event) {
-        event.preventDefault();
+    function submitFormAddWork() {
+        const token = localStorage.getItem("authToken");
+        console.log(token);
         const form = document.getElementById("addWork");
         const formData = new FormData(form);
-        console.log(formData.entries);
         // Afficher le contenu de formData pour vérifier
         for (let [key, value] of formData.entries()) {
             console.log(`${key}:`, value);
         }
 
-        const token = localStorage.getItem("authToken");
-        console.log(token);
         // Envoyer le formulaire avec fetch
         fetch('http://localhost:5678/api/works', {
             method: 'POST',

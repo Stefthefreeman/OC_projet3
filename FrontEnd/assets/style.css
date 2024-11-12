@@ -278,7 +278,10 @@ input[type="submit"] {
 #login a{
     text-align: center !important;
 }
-
+hr{
+    border: 1px solid #dedede;
+    width:100%;
+}
 .buttons {
     display: flex;
     justify-content: center;
