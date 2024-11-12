@@ -48,7 +48,7 @@ function showWorksInModal(works) {
             const imageId = event.target.getAttribute('data-image');
             console.log(imageId);
             const token=localStorage.getItem("authToken");
-            /*try {
+            try {
                 const response = await fetch(`http://localhost:5678/api/works/${imageId}`, {
                     method: 'DELETE',
                     headers: {
@@ -67,7 +67,7 @@ function showWorksInModal(works) {
                 }
             } catch (error) {
                 console.error("Erreur de requête :", error);
-            }*/
+            }
         });
     });
 }
