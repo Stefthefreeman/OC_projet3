@@ -141,7 +141,7 @@ function submitForm(event) {
     const token = localStorage.getItem("authToken");
     console.log(token);
     // Envoyer le formulaire avec fetch
-    /*fetch('http://localhost:5678/api/works', {
+    fetch('http://localhost:5678/api/works', {
         method: 'POST',
         headers: {
             'Authorization': `Bearer ${token}`
@@ -159,7 +159,7 @@ function submitForm(event) {
         })
         .catch(error => {
             console.log('Erreurs:', error);
-        });*/
+        });
 }
 
 
