@@ -333,6 +333,7 @@ hr{
     border-bottom:2px solid #dedede;
 }
 .modal-content input,select{
+    width: 98%;
     height: 50px;
     font-size: 1.2em;
     border: none;
@@ -375,7 +376,7 @@ hr{
 /* Container pour le bloc d'upload */
 .upload-container {
     position: relative;
-    width: 90%;
+    width:92%;
     padding: 20px;
     background-color: #e7f0f6;
     border-radius: 8px;
@@ -447,8 +448,6 @@ hr{
     margin-top: 5px;
 }
 
-
-
 .btn-add-picture{
     font-family: 'Syne', serif;
     color: white;
@@ -469,7 +468,6 @@ hr{
     margin-left: 25px;
     cursor: pointer;
     color: #1D6154;
-
 }
 
 .btn:hover {
