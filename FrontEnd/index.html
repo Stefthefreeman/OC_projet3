@@ -31,6 +31,7 @@
     <section id="introduction">
         <div id="myModal" class="modal">
             <div class="modal-content">
+                <span onclick="closeModal('myModal')" class="back-arrow">&larr;</span>
                 <span class="close">&times;</span>
                 <p>Galerie photo</p>
                 <div class="modal-gallery"></div>
@@ -39,6 +40,7 @@
         </div>
         <div id="modal2" class="modal">
             <div class="modal-content">
+                <span onclick="toggleModal('modal2', 'myModal')" class="back-arrow">&larr;</span>
                 <span class="close" onclick="closeModal('modal2')">&times;</span>
                 <p>Ajout photo</p>
                 <form action="#" id="addWork" method="post" enctype="multipart/form-data">
@@ -53,12 +55,12 @@
                     </div>
                     <br>
                         <label for="nameImg">Titre</label>
-                        <input type="text" name="title" id="nameImg">
+                        <input type="text" name="title" id="nameImg" required>
                         <label for="categories">Catégorie</label>
                         <select class="myCategories" name="category" id="categories">
                         </select>
                     <hr>
-                    <input type="submit" onclick="submitFormAddWork();" value="valider">
+                    <button class="btnFormUpload" id="submitButton" type="submit" onclick="submitFormAddWork();" disabled>Valider</button>
                 </form>
             </div>
         </div>
@@ -151,7 +153,6 @@
     });
     function submitFormAddWork() {
         const token = localStorage.getItem("authToken");
-        console.log(token);
         const form = document.getElementById("addWork");
         const formData = new FormData(form);
         // Afficher le contenu de formData pour vérifier

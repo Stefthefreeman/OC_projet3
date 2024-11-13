@@ -15,7 +15,7 @@ function loGin() {
         }).then(response => {
             if (response.status === 200) {
                 // Redirige vers la nouvelle URL
-                window.location.href = '#';
+                window.location.href = './index.html';
 
             } else {
                 console.log('Erreur : Code de statut non 200');

@@ -330,7 +330,7 @@ hr{
     display: flex;
     flex-direction: column;
     gap:15px;
-    border-bottom:2px solid #dedede;
+
 }
 .modal-content input,select{
     width: 98%;
@@ -458,7 +458,32 @@ hr{
     border-radius: 60px;
     cursor: pointer;
 }
+.btnFormUpload{
+    width:50%;
+    margin-left: 25%;
+    border-radius:8px;
+    padding:5px;
+    color: white;
+    background-color: #1D6154;
+}
+.btnFormUpload:disabled {
+    background-color: gray;
+    cursor: not-allowed;
 
+}
+.back-arrow {
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    float:left;
+    top: 10px;
+    left: 10px;
+    color: #333;
+}
+
+.back-arrow:hover {
+    color: #555;
+}
 .btn {
     background-color: white;
     padding: 10px 20px 10px 20px;

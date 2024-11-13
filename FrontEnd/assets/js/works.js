@@ -84,12 +84,12 @@ buttons.forEach(button => {
     const btnElement = document.getElementById(button.id);
 
     btnElement.addEventListener("click", function () {
-        const worksfilter = button.categoryId !== null
+        const worksFilter = button.categoryId !== null
             ? works.filter(work => work.categoryId === button.categoryId)
             : works;
 
         document.querySelector(".gallery").innerHTML = "";
-        showWorks(worksfilter);
+        showWorks(worksFilter);
     });
 });
 // Récupérer les éléments de la modale
@@ -123,14 +123,36 @@ function selectInModal(categories) {
         option.value = category.id;
         select.appendChild(option);
     }
-
 }
-
 selectInModal(categories);
+function showLink(){
+    const link = document.getElementById("dismiss");
+   //localStorage.removeItem("authToken");
+    if(localStorage.getItem("authToken") === null){
+        link.style.display = "none";
+    }
+}
+showLink();
+function checkFields() {
+    const form = document.getElementById('addWork');
+    const submitButton = document.getElementById('submitButton');
+
+// Fonction pour vérifier si tous les champs requis sont remplis
+    function checkForm() {
+        submitButton.disabled = !form.checkValidity();
+    }
+
+// Ajout de l'événement 'input' sur chaque champ du formulaire pour vérifier le formulaire à chaque modification
+    form.addEventListener('input', checkForm);
+}
+checkFields();
 
 
-
-
-
-
+const myModal = document.getElementById("modal2");
+// Fermer la modal en cliquant à l'extérieur du contenu
+window.addEventListener("click", (event) => {
+    if (event.target === myModal) {
+        myModal.style.display = "none";
+    }
+});
 
