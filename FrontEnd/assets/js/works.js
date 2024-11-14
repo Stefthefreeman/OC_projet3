@@ -21,7 +21,9 @@ function showWorks(works) {
 
     }
 }
+
 showWorks(works);
+
 //Affiche les travaux dans la modale 1
 function showWorksInModal(works) {
     let work;
@@ -46,7 +48,7 @@ function showWorksInModal(works) {
         i.addEventListener('click', async (event) => {
             const imageId = event.target.getAttribute('data-image');
             console.log(imageId);
-            const token=localStorage.getItem("authToken");
+            const token = localStorage.getItem("authToken");
             try {
                 const response = await fetch(`http://localhost:5678/api/works/${imageId}`, {
                     method: 'DELETE',
@@ -68,7 +70,9 @@ function showWorksInModal(works) {
         });
     });
 }
+
 showWorksInModal(works);
+
 //Filtrer les travaux dans la gallerie
 function galleryFilter() {
     const buttons = new Set([
@@ -91,6 +95,7 @@ function galleryFilter() {
         });
     });
 }
+
 galleryFilter();
 
 
@@ -115,6 +120,7 @@ window.onclick = function (event) {
         modal.style.display = "none";
     }
 }
+
 //select via api
 function selectInModal(categories) {
     for (let i = 0; i < categories.length; i++) {
@@ -126,27 +132,32 @@ function selectInModal(categories) {
         select.appendChild(option);
     }
 }
+
 selectInModal(categories);
 
 //cache le lien modifier si non connecté
-function showLink(){
+function showLink() {
     const link = document.getElementById("dismiss");
-     //localStorage.removeItem("authToken");
-    if(localStorage.getItem("authToken") === null){
+    //localStorage.removeItem("authToken");
+    if (localStorage.getItem("authToken") === null) {
         link.style.display = "none";
     }
 }
+
 showLink();
 
 //verifie si les champs du formulaire d'upload sont bien remplis
 function checkFields() {
     const form = document.getElementById('addWork');
     const submitButton = document.getElementById('submitButton');
+
     function checkForm() {
         submitButton.disabled = !form.checkValidity();
     }
+
     form.addEventListener('input', checkForm);
 }
+
 checkFields();
 
 // Fermer la modale 2 en cliquant à l'extérieur du contenu

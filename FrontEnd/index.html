@@ -60,7 +60,9 @@
                 <select class="myCategories" name="category" id="categories">
                 </select>
                 <hr>
-                <button class="btnFormUpload" id="submitButton" type="submit" onclick="submitFormAddWork();" disabled>Valider</button>
+                <button class="btnFormUpload" id="submitButton" type="submit" onclick="submitFormAddWork();" disabled>
+                    Valider
+                </button>
             </form>
         </div>
     </div>
@@ -126,6 +128,7 @@
     function closeModal(id) {
         document.getElementById(id).style.display = "none";
     }
+
     // image Preview
     function previewImage(event) {
         const file = event.target.files[0];
@@ -151,6 +154,7 @@
     document.getElementById("imagePreview").addEventListener("click", function () {
         document.getElementById("fileInput").click();
     });
+
     //formulaire d'upload d'un nouveau travail
     function submitFormAddWork() {
         const token = localStorage.getItem("authToken");
