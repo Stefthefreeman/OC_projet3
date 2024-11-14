@@ -28,43 +28,43 @@
     </nav>
 </header>
 <main>
-    <section id="introduction">
-        <div id="myModal" class="modal">
-            <div class="modal-content">
-                <span onclick="closeModal('myModal')" class="back-arrow">&larr;</span>
-                <span class="close">&times;</span>
-                <p>Galerie photo</p>
-                <div class="modal-gallery"></div>
-                <button onclick="toggleModal('myModal', 'modal2')" class="btn-add-picture">Ajouter une photo</button>
-            </div>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span onclick="closeModal('myModal')" class="back-arrow">&larr;</span>
+            <span class="close">&times;</span>
+            <p>Galerie photo</p>
+            <div class="modal-gallery"></div>
+            <hr>
+            <button onclick="toggleModal('myModal', 'modal2')" class="btn-add-picture">Ajouter une photo</button>
         </div>
-        <div id="modal2" class="modal">
-            <div class="modal-content">
-                <span onclick="toggleModal('modal2', 'myModal')" class="back-arrow">&larr;</span>
-                <span class="close" onclick="closeModal('modal2')">&times;</span>
-                <p>Ajout photo</p>
-                <form action="#" id="addWork" method="post" enctype="multipart/form-data">
-                    <div class="upload-container">
-                        <div class="image-preview" id="imagePreview">
-                            <img src="./assets/icons/placeholder-image.png" alt="Placeholder"/>
-                        </div>
-                        <label for="fileInput" class="upload-button">+ Ajouter photo</label>
-                        <input type="file" name="image" id="fileInput" accept="image/*" onchange="previewImage(event)"/>
-                        <br>
-                        <span class="file-info">jpg, png ; 4mo max</span>
+    </div>
+    <div id="modal2" class="modal">
+        <div class="modal-content">
+            <span onclick="toggleModal('modal2', 'myModal')" class="back-arrow">&larr;</span>
+            <span class="close" onclick="closeModal('modal2')">&times;</span>
+            <p>Ajout photo</p>
+            <form action="#" id="addWork" method="post" enctype="multipart/form-data">
+                <div class="upload-container">
+                    <div class="image-preview" id="imagePreview">
+                        <img src="./assets/icons/placeholder-image.png" alt="Placeholder">
                     </div>
+                    <label for="fileInput" class="upload-button">+ Ajouter photo</label>
+                    <input type="file" name="image" id="fileInput" accept="image/*" onchange="previewImage(event)">
                     <br>
-                        <label for="nameImg">Titre</label>
-                        <input type="text" name="title" id="nameImg" required>
-                        <label for="categories">Catégorie</label>
-                        <select class="myCategories" name="category" id="categories">
-                        </select>
-                    <hr>
-                    <button class="btnFormUpload" id="submitButton" type="submit" onclick="submitFormAddWork();" disabled>Valider</button>
-                </form>
-            </div>
+                    <span class="file-info">jpg, png ; 4mo max</span>
+                </div>
+                <br>
+                <label for="nameImg">Titre</label>
+                <input type="text" name="title" id="nameImg" required>
+                <label for="categories">Catégorie</label>
+                <select class="myCategories" name="category" id="categories">
+                </select>
+                <hr>
+                <button class="btnFormUpload" id="submitButton" type="submit" onclick="submitFormAddWork();" disabled>Valider</button>
+            </form>
         </div>
-
+    </div>
+    <section id="introduction">
         <figure>
             <img src="./assets/images/sophie-bluel.png" alt="">
         </figure>
@@ -82,7 +82,7 @@
     <section id="portfolio">
         <div class="display-inline">
             <h2>Mes Projets</h2>
-            <p id="dismiss"><i class="fas fa-edit"></i><a id="openModalBtn">Modifier</a></p>
+            <p id="dismiss"><i class="fas fa-edit"></i><a id="openModalLink">Modifier</a></p>
         </div>
         <div class="buttons">
             <button class="btn" id="all">Tous</button>
@@ -116,8 +116,8 @@
         </ul>
     </nav>
 </footer>
-</body>
 <script>
+    //fermer la modale 1 et ouvrir la modale 2
     function toggleModal(closeId, openId) {
         document.getElementById(closeId).style.display = "none";
         document.getElementById(openId).style.display = "flex";
@@ -126,7 +126,7 @@
     function closeModal(id) {
         document.getElementById(id).style.display = "none";
     }
-
+    // image Preview
     function previewImage(event) {
         const file = event.target.files[0];
 
@@ -137,7 +137,7 @@
             reader.onload = function (e) {
                 const imagePreview = document.getElementById("imagePreview");
 
-                // Remplace le texte par l'image téléchargée
+                // Remplace l'image existante par l'image téléchargée
                 imagePreview.innerHTML = `<img src="${e.target.result}" alt="Aperçu de l'image">`;
             };
 
@@ -148,9 +148,10 @@
     }
 
     // Ouvrir le sélecteur de fichier lorsque l'utilisateur clique sur l'aperçu
-        document.getElementById("imagePreview").addEventListener("click", function () {
+    document.getElementById("imagePreview").addEventListener("click", function () {
         document.getElementById("fileInput").click();
     });
+    //formulaire d'upload d'un nouveau travail
     function submitFormAddWork() {
         const token = localStorage.getItem("authToken");
         const form = document.getElementById("addWork");
@@ -181,6 +182,8 @@
             .catch(error => {
                 console.log('Erreurs:', error);
             });
+
+        //Ajoute le travail dans la gallerie
         function addImageToGallery(imageUrl) {
             const gallery = document.querySelector(".gallery");
 
@@ -194,4 +197,6 @@
         }
     }
 </script>
+</body>
+
 </html>

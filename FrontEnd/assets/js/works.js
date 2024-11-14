@@ -2,8 +2,9 @@ const reponse = await fetch('http://localhost:5678/api/works/');
 const works = await reponse.json();
 const cats = await fetch('http://localhost:5678/api/categories');
 const categories = await cats.json();
-console.log(categories);
+//console.log(categories);
 
+//Affiche les travaux dans la gallerie
 function showWorks(works) {
     for (let i = 0; i < works.length; i++) {
         const work = works[i];
@@ -14,16 +15,14 @@ function showWorks(works) {
         imgGallery.alt = work.title;
         const figCaption = document.createElement("figcaption");
         figCaption.innerText = work.title;
-
         sectionGallery.appendChild(galleryElement);
         galleryElement.appendChild(imgGallery);
         galleryElement.appendChild(figCaption);
 
     }
 }
-
 showWorks(works);
-
+//Affiche les travaux dans la modale 1
 function showWorksInModal(works) {
     let work;
     for (let i = 0; i < works.length; i++) {
@@ -41,8 +40,8 @@ function showWorksInModal(works) {
         sectionGallery.appendChild(galleryElement);
         galleryElement.appendChild(imgGallery);
         galleryElement.appendChild(trashIcon);
-        //console.log(galleryElement.id);
     }
+    //supprimer un travail
     document.querySelectorAll('.deleteImg').forEach((i) => {
         i.addEventListener('click', async (event) => {
             const imageId = event.target.getAttribute('data-image');
@@ -54,9 +53,7 @@ function showWorksInModal(works) {
                     headers: {
                         'Authorization': `Bearer ${token}`,
                     }
-
                 });
-
                 if (response.ok) {
                     // Supprimer l'image du DOM si la suppression est réussie
                     const imageContainer = event.target.closest('#image-container');
@@ -71,34 +68,39 @@ function showWorksInModal(works) {
         });
     });
 }
-
 showWorksInModal(works);
-const buttons = new Set([
-    {id: "btn-object", categoryId: 1},
-    {id: "btn-appart", categoryId: 2},
-    {id: "btn-hr", categoryId: 3},
-    {id: "all", categoryId: null}
-]);
+//Filtrer les travaux dans la gallerie
+function galleryFilter() {
+    const buttons = new Set([
+        {id: "btn-object", categoryId: 1},
+        {id: "btn-appart", categoryId: 2},
+        {id: "btn-hr", categoryId: 3},
+        {id: "all", categoryId: null}
+    ]);
 
-buttons.forEach(button => {
-    const btnElement = document.getElementById(button.id);
+    buttons.forEach(button => {
+        const btnElement = document.getElementById(button.id);
 
-    btnElement.addEventListener("click", function () {
-        const worksFilter = button.categoryId !== null
-            ? works.filter(work => work.categoryId === button.categoryId)
-            : works;
+        btnElement.addEventListener("click", function () {
+            const worksFilter = button.categoryId !== null
+                ? works.filter(work => work.categoryId === button.categoryId)
+                : works;
 
-        document.querySelector(".gallery").innerHTML = "";
-        showWorks(worksFilter);
+            document.querySelector(".gallery").innerHTML = "";
+            showWorks(worksFilter);
+        });
     });
-});
-// Récupérer les éléments de la modale
+}
+galleryFilter();
+
+
+// Récupérer les éléments de la modale 1
 const modal = document.getElementById("myModal");
-const openModalBtn = document.getElementById("openModalBtn");
+const openModalLink = document.getElementById("openModalLink");
 const closeModalBtn = document.querySelector(".close");
 
 // Ouvrir la modale lors du clic sur le bouton
-openModalBtn.onclick = function () {
+openModalLink.onclick = function () {
     modal.style.display = "flex";
 }
 
@@ -113,7 +115,7 @@ window.onclick = function (event) {
         modal.style.display = "none";
     }
 }
-
+//select via api
 function selectInModal(categories) {
     for (let i = 0; i < categories.length; i++) {
         const category = categories[i];
@@ -125,31 +127,30 @@ function selectInModal(categories) {
     }
 }
 selectInModal(categories);
+
+//cache le lien modifier si non connecté
 function showLink(){
     const link = document.getElementById("dismiss");
-   //localStorage.removeItem("authToken");
+     //localStorage.removeItem("authToken");
     if(localStorage.getItem("authToken") === null){
         link.style.display = "none";
     }
 }
 showLink();
+
+//verifie si les champs du formulaire d'upload sont bien remplis
 function checkFields() {
     const form = document.getElementById('addWork');
     const submitButton = document.getElementById('submitButton');
-
-// Fonction pour vérifier si tous les champs requis sont remplis
     function checkForm() {
         submitButton.disabled = !form.checkValidity();
     }
-
-// Ajout de l'événement 'input' sur chaque champ du formulaire pour vérifier le formulaire à chaque modification
     form.addEventListener('input', checkForm);
 }
 checkFields();
 
-
+// Fermer la modale 2 en cliquant à l'extérieur du contenu
 const myModal = document.getElementById("modal2");
-// Fermer la modal en cliquant à l'extérieur du contenu
 window.addEventListener("click", (event) => {
     if (event.target === myModal) {
         myModal.style.display = "none";
