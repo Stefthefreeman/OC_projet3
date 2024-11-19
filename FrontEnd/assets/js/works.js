@@ -138,7 +138,7 @@ selectInModal(categories);
 //cache le lien modifier si non connecté
 function showLink() {
     const link = document.getElementById("dismiss");
-    //localStorage.removeItem("authToken");
+   // localStorage.removeItem("authToken");
     if (localStorage.getItem("authToken") === null) {
         link.style.display = "none";
     }
