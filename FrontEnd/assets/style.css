@@ -153,11 +153,12 @@ li:hover {
 }
 
 .gallery {
-    width: 100%;
+    width: 90%;
     display: grid;
+    justify-self: center;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-column-gap: 20px;
-    grid-row-gap: 20px;
+    grid-column-gap: 1.25em;
+    grid-row-gap: 1.25em;;
 }
 
 .gallery img {
@@ -170,16 +171,14 @@ li:hover {
     width: 100%;
     display: grid;
     grid-template-columns: 0.8fr 0.8fr 0.8fr 0.8fr 0.8fr;
-    grid-column-gap: 7px;
-    grid-row-gap: 15px;
-    padding-bottom: 15px;
+    grid-column-gap: 0.938em;
+    grid-row-gap: 0.938em;
+    padding-bottom: 0.938em;
 }
 
 .modal-gallery img {
     width: 77px;
     height: 102px;
-
-
 }
 
 .image-container {
@@ -312,9 +311,11 @@ hr {
 }
 
 .buttons {
+    width:585px;
+    height: 38px;
     display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
+    justify-self: center;
+    margin-bottom: 30px;
 
 }
 
@@ -322,6 +323,7 @@ hr {
     display: flex;
     justify-content: center;
     justify-items: center;
+    margin-bottom:20px;
 }
 
 .display-inline p {
@@ -347,13 +349,15 @@ hr {
     justify-items: center;
     background-color: #fff;
     border-radius: 10px;
-    padding: 30px;
+    padding: 50px;
     width: 630px;
     height: 688px;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-
+.modal-content hr{
+    margin-top: 30px;
+}
 .modal-content-upload {
     width: 630px;
     height: 670px;
@@ -558,11 +562,12 @@ hr {
 }
 
 .btn {
+    height:37px;
     background-color: white;
     padding: 10px 20px 10px 20px;
     font-weight: bold;
     border: 2px solid #1D6154;
-    border-radius: 20px;
+    border-radius: 60px;
     margin-left: 25px;
     cursor: pointer;
     color: #1D6154;
