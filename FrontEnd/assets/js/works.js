@@ -74,7 +74,7 @@ function showWorksInModal(works) {
 showWorksInModal(works);
 
 //Filtrer les travaux dans la gallerie
-function galleryFilter() {
+async function galleryFilter() {
     const buttons = new Set([
         {id: "btn-object", categoryId: 1},
         {id: "btn-appart", categoryId: 2},
@@ -86,6 +86,15 @@ function galleryFilter() {
         const btnElement = document.getElementById(button.id);
 
         btnElement.addEventListener("click", function () {
+            // Supprimer la classe 'active' de tous les boutons
+            buttons.forEach(b => {
+                document.getElementById(b.id).classList.remove('active');
+            });
+
+            // Ajouter la classe 'active' au bouton cliqué
+            btnElement.classList.add('active');
+
+            // Appliquer le filtre des œuvres
             const worksFilter = button.categoryId !== null
                 ? works.filter(work => work.categoryId === button.categoryId)
                 : works;
@@ -95,7 +104,6 @@ function galleryFilter() {
         });
     });
 }
-
 galleryFilter();
 
 
@@ -138,7 +146,6 @@ selectInModal(categories);
 //cache le lien modifier si non connecté
 function showLink() {
     const link = document.getElementById("dismiss");
-   // localStorage.removeItem("authToken");
     if (localStorage.getItem("authToken") === null) {
         link.style.display = "none";
     }
@@ -168,3 +175,20 @@ window.addEventListener("click", (event) => {
     }
 });
 
+function handleLoginClick() {
+    const loginLink = document.getElementById("loginLink");
+
+    // Remplacer le contenu du lien
+    if(localStorage.getItem("authToken") !== null) {
+        loginLink.textContent = "logout";
+        // Modifier l'action du clic pour déconnecter
+        loginLink.setAttribute("href", "#");
+        loginLink.onclick = handleLogoutClick; // Changer l'événement de clic
+    }
+
+}
+handleLoginClick();
+function handleLogoutClick() {
+    localStorage.removeItem("authToken");
+    location.reload();
+}

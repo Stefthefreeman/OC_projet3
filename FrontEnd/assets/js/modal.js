@@ -10,16 +10,19 @@ function closeModal(id) {
 // image Preview
 function previewImage(event) {
     const file = event.target.files[0];
-
+    const uploadButton = document.getElementById("fileInputBtn");
+    const infoText = document.getElementById("fileInfo");
     // Vérifie si le fichier est une image
     if (file && file.type.startsWith('image/')) {
         const reader = new FileReader();
 
         reader.onload = function (e) {
             const imagePreview = document.getElementById("imagePreview");
-
+            uploadButton.style.display = "none"; // Cacher le bouton
+            infoText.style.display = "none"; // Cacher le texte
             // Remplace l'image existante par l'image téléchargée
             imagePreview.innerHTML = `<img src="${e.target.result}" alt="Aperçu de l'image">`;
+
         };
 
         reader.readAsDataURL(file);
@@ -29,9 +32,9 @@ function previewImage(event) {
 }
 
 // Ouvrir le sélecteur de fichier lorsque l'utilisateur clique sur l'aperçu
-document.getElementById("imagePreview").addEventListener("click", function () {
+/*document.getElementById("imagePreview").addEventListener("click", function () {
     document.getElementById("fileInput").click();
-});
+});*/
 
 //formulaire d'upload d'un nouveau travail
 function submitFormAddWork() {
