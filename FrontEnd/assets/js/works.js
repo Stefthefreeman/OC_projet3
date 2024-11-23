@@ -2,7 +2,7 @@ const reponse = await fetch('http://localhost:5678/api/works/');
 const works = await reponse.json();
 const cats = await fetch('http://localhost:5678/api/categories');
 const categories = await cats.json();
-//console.log(categories);
+console.log(categories);
 
 //Affiche les travaux dans la gallerie
 function showWorks(works) {
@@ -73,61 +73,71 @@ function showWorksInModal(works) {
 
 showWorksInModal(works);
 
+//buttons
+function createButton(categories) {
+    const sectionButton = document.querySelector(".buttons");
+    const buttonTous = document.createElement("button");
+    buttonTous.className = "btn active";
+    buttonTous.textContent = "Tous";
+    buttonTous.id = "0";
+    sectionButton.appendChild(buttonTous);
+    for (let i = 0; i < categories.length; i++) {
+        const button = document.createElement("button");
+        //console.log(categories[i].id);
+        button.className = "btn";
+        button.textContent = categories[i].name;
+        button.id = categories[i].id;
+        sectionButton.appendChild(button);
+    }
+
+}
+
+createButton(categories);
+
+
 //Filtrer les travaux dans la gallerie
-async function galleryFilter() {
-    const buttons = new Set([
-        {id: "btn-object", categoryId: 1},
-        {id: "btn-appart", categoryId: 2},
-        {id: "btn-hr", categoryId: 3},
-        {id: "all", categoryId: null}
-    ]);
+function galleryFilter(categories) {
+    // Crée un Set pour stocker les identifiants des boutons
+    const buttons = new Set();
+    buttons.add(0); // Ajoute un identifiant par défaut
 
-    buttons.forEach(button => {
-        const btnElement = document.getElementById(button.id);
+// Remplit le Set avec les identifiants des catégories
+    for (let i = 0; i < categories.length; i++) {
+        buttons.add(categories[i].id);
+    }
 
+// Parcourt chaque bouton dans le Set
+    buttons.forEach(buttonId => {
+        const btnElement = document.getElementById(buttonId); // Récupère l'élément bouton par son ID
+        if (!btnElement) return; // Vérifie si l'élément existe pour éviter les erreurs
+
+        //console.log(buttonId);
+
+        // Ajoute un écouteur d'événements "click" au bouton
         btnElement.addEventListener("click", function () {
-            // Supprimer la classe 'active' de tous les boutons
-            buttons.forEach(b => {
-                document.getElementById(b.id).classList.remove('active');
+            // Supprime la classe 'active' de tous les boutons
+            buttons.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.classList.remove('active'); // Vérifie si l'élément existe avant de modifier sa classe
             });
 
-            // Ajouter la classe 'active' au bouton cliqué
+            // Ajoute la classe 'active' au bouton cliqué
             btnElement.classList.add('active');
 
-            // Appliquer le filtre des œuvres
-            const worksFilter = button.categoryId !== null
-                ? works.filter(work => work.categoryId === button.categoryId)
+            // Filtre les œuvres selon la catégorie
+            const worksFilter = buttonId !== 0
+                ? works.filter(work => work.categoryId === buttonId)
                 : works;
 
+            // Met à jour la galerie avec les œuvres filtrées
             document.querySelector(".gallery").innerHTML = "";
             showWorks(worksFilter);
         });
     });
-}
-galleryFilter();
 
-
-// Récupérer les éléments de la modale 1
-const modal = document.getElementById("myModal");
-const openModalLink = document.getElementById("openModalLink");
-const closeModalBtn = document.querySelector(".close");
-
-// Ouvrir la modale lors du clic sur le bouton
-openModalLink.onclick = function () {
-    modal.style.display = "flex";
 }
 
-// Fermer la modale lors du clic sur le bouton de fermeture
-closeModalBtn.onclick = function () {
-    modal.style.display = "none";
-}
-
-// Fermer la modale lors du clic en dehors de la modale
-window.onclick = function (event) {
-    if (event.target === modal) {
-        modal.style.display = "none";
-    }
-}
+galleryFilter(categories);
 
 //select via api
 function selectInModal(categories) {
@@ -179,7 +189,7 @@ function handleLoginClick() {
     const loginLink = document.getElementById("loginLink");
 
     // Remplacer le contenu du lien
-    if(localStorage.getItem("authToken") !== null) {
+    if (localStorage.getItem("authToken") !== null) {
         loginLink.textContent = "logout";
         // Modifier l'action du clic pour déconnecter
         loginLink.setAttribute("href", "#");
@@ -187,7 +197,9 @@ function handleLoginClick() {
     }
 
 }
+
 handleLoginClick();
+
 function handleLogoutClick() {
     localStorage.removeItem("authToken");
     location.reload();

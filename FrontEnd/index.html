@@ -13,8 +13,8 @@
           crossorigin="anonymous" referrerpolicy="no-referrer">
     <meta name="description" content="">
     <link rel="stylesheet" href="./assets/style.css">
-    <script type="module" src="./assets/js/works.js"></script>
-    <script src="./assets/js/modal.js"></script>
+    <script type="module" src="./assets/js/works.js" defer></script>
+    <script src="./assets/js/script.js" defer></script>
 </head>
 <body>
 <header>
@@ -40,8 +40,8 @@
     </div>
     <div id="modal2" class="modal">
         <div class="modal-content-upload">
-            <span onclick="toggleModal('modal2', 'myModal')" class="back-arrow"><i
-                    class="fa-solid fa-arrow-left"></i></span>
+            <span onclick="toggleModal('modal2', 'myModal')" class="back-arrow">
+                <i class="fa-solid fa-arrow-left"></i></span>
             <span class="close" onclick="closeModal('modal2')">&times;</span>
             <p>Ajout photo</p>
             <form action="#" id="addWork" method="post" enctype="multipart/form-data">
@@ -89,15 +89,8 @@
             <h2>Mes Projets</h2>
             <p id="dismiss"><i class="fas fa-edit"></i><a id="openModalLink">Modifier</a></p>
         </div>
-        <div class="buttons">
-            <button class="btn active" id="all">Tous</button>
-            <button class="btn" id="btn-object">Objets</button>
-            <button class="btn" id="btn-appart">Appartements</button>
-            <button class="btn" id="btn-hr">Hôtels & Restaurants</button>
-        </div>
-        <div class="gallery">
-
-        </div>
+        <div class="buttons"></div>
+        <div class="gallery"></div>
     </section>
     <section id="contact">
         <h2>Contact</h2>
