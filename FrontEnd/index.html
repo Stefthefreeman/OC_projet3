@@ -13,7 +13,7 @@
           crossorigin="anonymous" referrerpolicy="no-referrer">
     <meta name="description" content="">
     <link rel="stylesheet" href="./assets/style.css">
-    <script type="module" src="./assets/js/works.js" defer></script>
+    <script type="module" src="./assets/js/works.js"></script>
     <script src="./assets/js/script.js" defer></script>
 </head>
 <body>
@@ -52,24 +52,26 @@
                         </div>
                     </div>
                     <label for="fileInput" class="upload-button" id="fileInputBtn">+ Ajouter photo</label>
-                    <input type="file" name="image" id="fileInput" accept="image/*" onchange="previewImage(event)">
+                    <input type="file" name="image" id="fileInput" accept=".jpg,.png" onchange="previewImage(event)">
                     <br>
                     <span class="file-info" id="fileInfo">jpg, png ; 4mo max</span>
                 </div>
                 <br>
-                <label for="nameImg">Titre</label>
+                <label for="nameImg">Titre
                 <input type="text" name="title" id="nameImg" required>
-                <label for="categories">Catégorie</label>
+                </label>
+                <label for="categories">Catégorie
                 <select class="myCategories" name="category" id="categories">
                 </select>
-                <hr>
+                </label>
+                    <hr>
                 <button class="btnFormUpload" id="submitButton" type="submit" onclick="submitFormAddWork();" disabled>
                     Valider
                 </button>
             </form>
         </div>
     </div>
-    <section id="introduction">
+    <div id="introduction">
         <figure>
             <img src="./assets/images/sophie-bluel.png" alt="">
         </figure>
@@ -83,11 +85,11 @@
             <p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG,
                 décorateur(trice)</p>
         </article>
-    </section>
+    </div>
     <section id="portfolio">
         <div class="display-inline">
-            <h2>Mes Projets</h2>
-            <p id="dismiss"><i class="fas fa-edit"></i><a id="openModalLink">Modifier</a></p>
+            <h2 class="mt-50">Mes Projets</h2>
+            <p id="dismiss"><i class="fas fa-edit"></i><a id="openModalLink">&nbsp;Modifier</a></p>
         </div>
         <div class="buttons"></div>
         <div class="gallery"></div>

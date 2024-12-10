@@ -63,10 +63,7 @@ function submitFormAddWork() {
     const form = document.getElementById("addWork");
     const formData = new FormData(form);
     // Afficher le contenu de formData pour vérifier
-    for (let [key, value] of formData.entries()) {
-        console.log(`${key}:`, value);
-    }
-
+    console.table(Array.from(formData.entries()));
     // Envoyer le formulaire avec fetch
     fetch('http://localhost:5678/api/works', {
         method: 'POST',
@@ -76,6 +73,7 @@ function submitFormAddWork() {
         body: formData
     })
         .then(response => {
+            console.log(response);
             if (!response.ok) {
                 throw new Error(`Erreur HTTP : ${response.status}`);
             }
@@ -98,6 +96,6 @@ function submitFormAddWork() {
         img.alt = "Nouvelle photo"; // Texte alternatif, peut être personnalisé
         // Ajoute l'image à la galerie
         gallery.appendChild(img);
-        console.log(imageUrl);
+        console.log("image ajoutée avec succès");
     }
 }

@@ -121,6 +121,7 @@ li:hover {
 }
 
 #introduction {
+
     display: flex;
     align-items: center;
 }
@@ -132,7 +133,7 @@ li:hover {
 #introduction img {
     display: block;
     margin: auto;
-    width: 80%;
+    width: 85%;
 }
 
 #introduction article {
@@ -153,17 +154,32 @@ li:hover {
 }
 
 .gallery {
-    width: 90%;
+    width: 93%;
     display: grid;
     justify-self: center;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
     grid-column-gap: 1.25em;
     grid-row-gap: 1.25em;;
 }
+@-moz-document url-prefix() {
+    /* Styles spécifiques à Firefox */
+    .gallery {
+        width: 100%;
+        display: grid;
+        justify-self: center;
+        grid-template-columns: repeat(3, 1fr);
+        grid-column-gap: 1.25em;
+        grid-row-gap: 1.25em;;
+    }
+    .gallery img {
+        width: 80%;
+        height: 300px !important;
 
+    }
+}
 .gallery img {
     width: 100%;
-
+    height: 407px !important;
 }
 
 .modal-gallery {
@@ -174,11 +190,12 @@ li:hover {
     grid-column-gap: 0.938em;
     grid-row-gap: 0.938em;
     padding-bottom: 0.938em;
+    overflow-x:hidden;
 }
 
 .modal-gallery img {
     width: 77px;
-    height: 102px;
+    height: 160px !important;
 }
 
 .image-container {
@@ -300,7 +317,15 @@ hr {
     border: 1px solid #B3B3B3;
     width: 100%;
 }
-
+.mt-30{
+    margin-top: 30px;
+}
+.mt-40{
+    margin-top: 40px;
+}
+.mt-50{
+    margin-top: 50px;
+}
 .footer {
     position: fixed;
     bottom: 0;
@@ -311,12 +336,11 @@ hr {
 }
 
 .buttons {
-    width:585px;
+    width: 100%;
     height: 38px;
     display: flex;
-    justify-self: center;
+    justify-content: center; /* Pour centrer horizontalement les éléments enfants */
     margin-bottom: 30px;
-
 }
 
 .display-inline {
@@ -327,7 +351,7 @@ hr {
 }
 
 .display-inline p {
-    margin-top: 10px;
+    margin-top: 60px;
     margin-left: 30px;
 }
 
@@ -342,6 +366,7 @@ hr {
     background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
     justify-content: center;
     align-items: center;
+
 }
 
 /* Contenu de la modale */
@@ -351,9 +376,10 @@ hr {
     border-radius: 10px;
     padding: 50px;
     width: 630px;
-    height: 688px;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow-y: auto;
+    overflow-x:hidden;
 }
 .modal-content hr{
     margin-top: 30px;
@@ -501,13 +527,17 @@ hr {
     background-color: #e7f0f6;
     color: #2d5f77;
     margin-top: 10px;
+
 }
 
 .image-preview img {
-    width: 25.5%;
+    width: 25.8%;
+    height: 157px;
+    padding:0;
 }
 .imgPlaceholder img{
-    width: 60%;
+    width: 100%;
+    height:100px;
     object-fit: cover;
     border-radius: 15px; ;
 }
@@ -566,7 +596,7 @@ hr {
     background-color: white;
     padding: 10px 20px 10px 20px;
     font-weight: bold;
-    border: 2px solid #1D6154;
+    border: 1px solid #1D6154;
     border-radius: 60px;
     margin-left: 25px;
     cursor: pointer;

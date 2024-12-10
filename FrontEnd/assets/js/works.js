@@ -47,7 +47,7 @@ function showWorksInModal(works) {
     document.querySelectorAll('.deleteImg').forEach((i) => {
         i.addEventListener('click', async (event) => {
             const imageId = event.target.getAttribute('data-image');
-            console.log(imageId);
+            //console.log(imageId);
             const token = localStorage.getItem("authToken");
             try {
                 const response = await fetch(`http://localhost:5678/api/works/${imageId}`, {
@@ -60,7 +60,8 @@ function showWorksInModal(works) {
                     // Supprimer l'image du DOM si la suppression est réussie
                     const imageContainer = event.target.closest('#image-container');
                     imageContainer.remove();
-                    console.log("Image supprimée avec succès.");
+                 //   removeImageFromGallery(work.imageUrl);
+                    console.log("Image " + work.id +" - "+ work.imageUrl + " supprimée avec succès.");
                 } else {
                     console.error("Échec de la suppression de l'image.");
                 }
@@ -69,6 +70,20 @@ function showWorksInModal(works) {
             }
         });
     });
+    function removeImageFromGallery(imageUrl) {
+        const gallery = document.querySelector(".gallery");
+        const images = gallery.querySelectorAll("img"); // Sélectionne toutes les images dans la galerie
+
+        // Recherche l'image correspondant à l'URL donnée
+        images.forEach((img) => {
+            if (img.src === imageUrl && gallery.contains(img)) {
+                gallery.removeChild(img); // Supprime l'image si elle appartient bien à la galerie
+                console.log(img.src);
+            }
+        });
+    }
+
+
 }
 
 showWorksInModal(works);
@@ -83,19 +98,22 @@ function createButton(categories) {
     sectionButton.appendChild(buttonTous);
     for (let i = 0; i < categories.length; i++) {
         const button = document.createElement("button");
-        //console.log(categories[i].id);
         button.className = "btn";
         button.textContent = categories[i].name;
         button.id = categories[i].id;
         sectionButton.appendChild(button);
     }
-
+    if (localStorage.getItem("authToken") !== null) {
+        sectionButton.style.display = "none";
+        const gallery = document.querySelector(".gallery");
+        gallery.style.marginTop = "80px";
+    }
 }
 
 createButton(categories);
 
 
-//Filtrer les travaux dans la gallerie
+//Filtrer les travaux dans la galerie
 function galleryFilter(categories) {
     // Crée un Set pour stocker les identifiants des boutons
     const buttons = new Set();
@@ -111,7 +129,7 @@ function galleryFilter(categories) {
         const btnElement = document.getElementById(buttonId); // Récupère l'élément bouton par son ID
         if (!btnElement) return; // Vérifie si l'élément existe pour éviter les erreurs
 
-        //console.log(buttonId);
+        console.log(buttonId);
 
         // Ajoute un écouteur d'événements "click" au bouton
         btnElement.addEventListener("click", function () {
@@ -120,7 +138,7 @@ function galleryFilter(categories) {
                 const el = document.getElementById(id);
                 if (el) el.classList.remove('active'); // Vérifie si l'élément existe avant de modifier sa classe
             });
-
+            console.log("bouton click: " + btnElement.id);
             // Ajoute la classe 'active' au bouton cliqué
             btnElement.classList.add('active');
 

@@ -19,7 +19,7 @@ function loGin() {
 
             } else {
                 console.log('Erreur : Code de statut non 200');
-               alert(`Erreur : email ou mot de passe incorrect. Veuillez réessayer plus tard.`);
+               alert(`Erreur dans l’identifiant ou le mot de passe.`);
             }
             if (response.ok) {
                 return response.json(); // Convertit la réponse en JSON
