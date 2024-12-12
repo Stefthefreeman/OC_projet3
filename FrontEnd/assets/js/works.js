@@ -60,7 +60,6 @@ function showWorksInModal(works) {
                     // Supprimer l'image du DOM si la suppression est réussie
                     const imageContainer = event.target.closest('#image-container');
                     imageContainer.remove();
-                 //   removeImageFromGallery(work.imageUrl);
                     console.log("Image " + work.id +" - "+ work.imageUrl + " supprimée avec succès.");
                 } else {
                     console.error("Échec de la suppression de l'image.");
@@ -70,20 +69,6 @@ function showWorksInModal(works) {
             }
         });
     });
-    function removeImageFromGallery(imageUrl) {
-        const gallery = document.querySelector(".gallery");
-        const images = gallery.querySelectorAll("img"); // Sélectionne toutes les images dans la galerie
-
-        // Recherche l'image correspondant à l'URL donnée
-        images.forEach((img) => {
-            if (img.src === imageUrl && gallery.contains(img)) {
-                gallery.removeChild(img); // Supprime l'image si elle appartient bien à la galerie
-                console.log(img.src);
-            }
-        });
-    }
-
-
 }
 
 showWorksInModal(works);
